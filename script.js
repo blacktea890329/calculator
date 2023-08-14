@@ -32,7 +32,7 @@ function handleSymbol(symbol){
             if(buffer.length ===1){
                 buffer = '0';
             }else{
-                buffer = buffer.toString(0, buffer.length - 1);
+                buffer = buffer.substring(0, buffer.length - 1);
             }
             break;
         case '+':
@@ -48,7 +48,8 @@ function handleMath(symbol){
     if(buffer === '0'){
         return;
     }
-    const intBuffer = parseInt(intBuffer);
+
+    const intBuffer = parseInt(buffer);
 
     if(runningTotal === 0){
         runningTotal = intBuffer;
@@ -61,13 +62,13 @@ function handleMath(symbol){
 
 function flushOperation(intBuffer){
     if(previousOperator === '+'){
-        runningTotal +=intBuffer;
+        runningTotal += intBuffer;
     }else if(previousOperator === '-'){
-        runningTotal -=intBuffer;
-    }else if(previousOperator === '*'){
-        runningTotal *=intBuffer;
+        runningTotal -= intBuffer;
+    }else if(previousOperator === 'x'){
+        runningTotal *= intBuffer;
     }else if(previousOperator === '÷'){
-        runningTotal /=intBuffer;
+        runningTotal /= intBuffer;
     }
 }
 
@@ -80,7 +81,9 @@ function handleNumber(numberString){
 }
 
 function init(){
-    document.querySelector('.calc-buttons').addEventListener('click', function(event{
-        
-    }))
+    document.querySelector('.buttons').addEventListener('click', function(event){
+        buttonClick(event.target.innerText);
+    })
 }
+
+init(); //初始化設定
