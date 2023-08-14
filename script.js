@@ -39,5 +39,48 @@ function handleSymbol(symbol){
         case '-':
         case 'x':
         case '÷':
+            handleMath(symbol);
+            break;
     }
+}
+
+function handleMath(symbol){
+    if(buffer === '0'){
+        return;
+    }
+    const intBuffer = parseInt(intBuffer);
+
+    if(runningTotal === 0){
+        runningTotal = intBuffer;
+    }else{
+        flushOperation(intBuffer);
+    }
+    previousOperator = symbol;
+    buffer = '0';
+}
+
+function flushOperation(intBuffer){
+    if(previousOperator === '+'){
+        runningTotal +=intBuffer;
+    }else if(previousOperator === '-'){
+        runningTotal -=intBuffer;
+    }else if(previousOperator === '*'){
+        runningTotal *=intBuffer;
+    }else if(previousOperator === '÷'){
+        runningTotal /=intBuffer;
+    }
+}
+
+function handleNumber(numberString){
+    if(buffer === '0'){
+        buffer = numberString;
+    }else{
+        buffer += numberString;
+    }
+}
+
+function init(){
+    document.querySelector('.calc-buttons').addEventListener('click', function(event{
+        
+    }))
 }
